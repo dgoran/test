@@ -1,0 +1,136 @@
+﻿{
+	"toJSON": true,
+	"extraProperties": {
+		"version": "2",
+		"classes": {
+			"Speaker": {
+				"panelColor": "#B8CCE4",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 10,
+						"Y": 86
+					}
+				}
+			},
+			"Presentation": {
+				"panelColor": "#C3D69B",
+				"panel": {
+					"isOpen": "true",
+					"pathVisible": true,
+					"position": {
+						"X": 245,
+						"Y": 20
+					}
+				}
+			}
+		},
+		"model": {
+			"scriptMode": "manual",
+			"workspaceLeft": 0,
+			"workspaceTop": 59,
+			"lastScriptLocation": {
+				"Speaker": {
+					"computed": "Speaker/Speaker-events.js"
+				}
+			}
+		}
+	},
+	"dataClasses": [
+		{
+			"name": "Presentation",
+			"className": "Presentation",
+			"collectionName": "PresentationCollection",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long"
+				},
+				{
+					"name": "talkTitle",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "date",
+					"kind": "storage",
+					"scope": "public",
+					"type": "date",
+					"simpleDate": false
+				},
+				{
+					"name": "speaker",
+					"kind": "relatedEntity",
+					"scope": "public",
+					"type": "Speaker",
+					"path": "Speaker"
+				}
+			]
+		},
+		{
+			"name": "Speaker",
+			"className": "Speaker",
+			"collectionName": "Speakers",
+			"scope": "public",
+			"attributes": [
+				{
+					"name": "ID",
+					"kind": "storage",
+					"scope": "public",
+					"unique": true,
+					"autosequence": true,
+					"type": "long",
+					"primKey": true
+				},
+				{
+					"name": "firstName",
+					"kind": "storage",
+					"scope": "public",
+					"not_null": true,
+					"type": "string"
+				},
+				{
+					"name": "lastName",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "bio",
+					"kind": "storage",
+					"scope": "public",
+					"type": "string"
+				},
+				{
+					"name": "fullName",
+					"kind": "calculated",
+					"scope": "public",
+					"type": "string",
+					"scriptKind": "javascript",
+					"onGet": [
+						{
+							"from": "model.Speaker.fullName.onGet",
+							"userDefined": true
+						}
+					]
+				},
+				{
+					"name": "presentationCollection",
+					"scope": "public",
+					"reversePath": true,
+					"path": "speaker",
+					"type": "PresentationCollection",
+					"kind": "relatedEntities"
+				}
+			]
+		}
+	],
+	"type": []
+}
